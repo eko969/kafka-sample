@@ -12,7 +12,7 @@ async function bootstrap() {
       },
       consumer: {
         groupId: 'my-kafka',
-      }
+      },
     }
   });
 

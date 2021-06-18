@@ -1,1 +1,1 @@
-docker-compose -f docker-compose.kafka.yml up --build -d && docker-compose -f docker-compose.client.yml up --build
+docker-compose -f docker-compose.kafka.yml up --build
