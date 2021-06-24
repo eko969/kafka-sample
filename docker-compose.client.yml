@@ -1,0 +1,86 @@
+version: "3.9"
+services: 
+    
+  kafka_admin:
+    build: 
+      context: ./kafka-admin
+      dockerfile: Dockerfile
+    networks: 
+      - default
+    volumes: 
+      - type: volume
+        target: /home/node/app/node_modules
+      - type: bind
+        source: ./kafka-admin
+        target: /home/node/app
+    environment: 
+      KAFKA_SERVER: kafka:9092
+
+  kafka_consumer_1:
+    build: 
+      context: ./kafka-consumer
+      dockerfile: Dockerfile
+    networks: 
+      - default
+    container_name: kafka-consumer-1
+    volumes: 
+      - type: volume
+        target: /app/node_modules
+      - type: bind
+        source: ./kafka-consumer
+        target: /app
+    environment: 
+      KAFKA_SERVER: kafka:9092
+
+  kafka_consumer_2:
+    build: 
+      context: ./kafka-consumer2
+      dockerfile: Dockerfile
+    networks: 
+      - default
+    container_name: kafka-consumer-2
+    volumes: 
+    - type: volume
+      target: /app/node_modules
+    - type: bind
+      source: ./kafka-consumer2
+      target: /app
+    environment: 
+      KAFKA_SERVER: kafka:9092
+
+  kafka_consumer_3:
+    build: 
+      context: ./kafka-consumer3
+      dockerfile: Dockerfile
+    networks: 
+      - default
+    container_name: kafka-consumer-3
+    volumes: 
+      - type: volume
+        target: /app/node_modules
+      - type: bind
+        source: ./kafka-consumer3
+        target: /app
+    environment: 
+      KAFKA_SERVER: kafka:9092
+
+  kafka_producer:
+    build: 
+      context: ./kafka-producer
+      dockerfile: Dockerfile
+    networks: 
+      - default
+    ports: 
+      - "3000:3000"
+    volumes: 
+      - type: volume
+        target: /app/node_modules
+      - type: bind
+        source: ./kafka-producer
+        target: /app
+    environment: 
+      KAFKA_SERVER: kafka:9092
+      SERVICE_LISTEN: 3000
+
+networks: 
+  default:
