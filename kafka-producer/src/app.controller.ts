@@ -14,7 +14,7 @@ export class AppController {
         brokers: [process.env.KAFKA_SERVER],
       },
       consumer: {
-        groupId: 'my-kafka'
+        groupId: 'my-kafka-2'
       }
     }
   })
