@@ -21,16 +21,16 @@ async function run() {
 
     const admin = await kafka.admin();
     logger.info("connecting....");
-    admin.connect();
+    await admin.connect();
     logger.info("connected!");
-    admin.createTopics({
+    await admin.createTopics({
       "topics": [{
         "topic": "Users",
-        "numPartitions": 10
+        "numPartitions": 2
       }],
     });
     logger.info("Done create topic!");
-    admin.disconnect();
+    await admin.disconnect();
     
   } catch (e) {
     console.error(e)
