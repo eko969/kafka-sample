@@ -26,7 +26,7 @@ async function run() {
     admin.createTopics({
       "topics": [{
         "topic": "Users",
-        "numPartitions": 3
+        "numPartitions": 10
       }],
     });
     logger.info("Done create topic!");
