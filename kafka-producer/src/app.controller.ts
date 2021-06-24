@@ -27,6 +27,8 @@ export class AppController {
 
   @Get()
   async getHello(): Promise<any> {
-    return await this.client.send("Users", "Hello!!");
+    console.log("hit")
+    return await this.client.send("Users", {});
   }
+
 }
