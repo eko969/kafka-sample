@@ -13,7 +13,7 @@ export class AppController {
     this.logger.log(message);
     this.logger.log(`original msg: ${originalMessage}`);
     
-    return 'Hello World! 1';
+    return 'Hello World! group-a 1';
   }
 
 }
