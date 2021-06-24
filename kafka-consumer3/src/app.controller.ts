@@ -12,7 +12,7 @@ export class AppController {
     const originalMessage = context.getMessage();
     console.log(message)
     
-    return 'Hello World';
+    return 'Hello World! 3';
   }
 
 }
