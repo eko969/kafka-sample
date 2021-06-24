@@ -4,57 +4,22 @@ services:
   zookeeper:
     image: zookeeper
     container_name: zookeeper
+    networks: 
+      - default
     ports: 
       - "2181:2181"
   
   kafka:
     image: confluentinc/cp-kafka
     container_name: kafka
+    networks: 
+      - default
     ports: 
       - "9092:9092"
     environment: 
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-    
-  kafka_admin:
-    build: 
-      context: ./kafka-admin
-      dockerfile: Dockerfile
-    volumes: 
-      - type: volume
-        target: /home/node/app/node_modules
-      - type: bind
-        source: ./kafka-admin
-        target: /home/node/app
-    environment: 
-      KAFKA_SERVER: kafka:9092
-
-  kafka_consumer:
-    build: 
-      context: ./kafka-consumer
-      dockerfile: Dockerfile
-    volumes: 
-      - type: volume
-        target: /app/node_modules
-      - type: bind
-        source: ./kafka-consumer
-        target: /app
-    environment: 
-      KAFKA_SERVER: kafka:9092
-
-  kafka_producer:
-    build: 
-      context: ./kafka-producer
-      dockerfile: Dockerfile
-    ports: 
-      - "3000:3000"
-    volumes: 
-      - type: volume
-        target: /app/node_modules
-      - type: bind
-        source: ./kafka-producer
-        target: /app
-    environment: 
-      KAFKA_SERVER: kafka:9092
-      SERVICE_LISTEN: 3000
+      
+networks: 
+  default:
