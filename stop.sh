@@ -1,1 +1,1 @@
-docker-compose -f docker-compose.kafka.yml down --remove-orphan
+docker-compose -f docker-compose.kafka.yml down --remove-orphan 
