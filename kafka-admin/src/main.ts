@@ -29,7 +29,26 @@ async function run() {
         "numPartitions": 2
       }],
     });
+    await admin.createTopics({
+      topics: [{
+        topic: "quickstart-avro-offsets",
+        numPartitions: 1
+      }]
+    })
+    await admin.createTopics({
+      topics: [{
+        topic: "quickstart-avro-config",
+        numPartitions: 1
+      }]
+    })
+    await admin.createTopics({
+      topics: [{
+        topic: "quickstart-avro-status",
+        numPartitions: 1
+      }]
+    })
     logger.info("Done create topic!");
+    
     await admin.disconnect();
     
   } catch (e) {
