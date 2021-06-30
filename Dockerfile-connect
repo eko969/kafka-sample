@@ -1,5 +1,6 @@
 FROM confluentinc/cp-kafka-connect:latest
 
+COPY ./connector /usr/share/java
 RUN confluent-hub install --no-prompt debezium/debezium-connector-mysql:latest
 RUN confluent-hub install --no-prompt confluentinc/kafka-connect-jdbc:latest
 
