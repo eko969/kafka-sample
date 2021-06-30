@@ -1,6 +1,6 @@
 
 ### check status
-GET http://localhost:8083/connectors/quickstart-jdbc-source/status HTTP/1.1
+GET http://localhost:8083/connectors/jdbc_source_mysql_01/status HTTP/1.1
 Content-Type: application/json
 Accept: application/json
 
@@ -10,16 +10,22 @@ Content-Type: application/json
 Accept: application/json
 
 { 
-    "name": "quickstart-jdbc-source",
-    "config": { 
-        "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
-        "tasks.max": 1,
-        "connection.url": "jdbc:mysql://127.0.0.1:3306/connect_test?user=root&password=confluent",
-        "mode": "incrementing",
-        "incrementing.column.name": "id",
-        "timestamp.column.name": "modified",
-        "topic.prefix": "quickstart-jdbc-",
-        "poll.interval.ms": 1000 
-    } 
+    "name": "jdbc_source_mysql_01",
+     "config": {
+            "connector.class": "io.confluent.connect.jdbc.JdbcSourceConnector",
+            "connection.url": "jdbc:mysql://mysql:3306/connect_test",
+            "connection.user": "confluent",
+            "connection.password": "confluent",
+            "topic.prefix": "mysql-01-",
+            "poll.interval.ms" : 3600000,
+            "table.whitelist" : "test.accounts",
+            "mode":"bulk",
+            "transforms":"createKey,extractInt",
+            "transforms.createKey.type":"org.apache.kafka.connect.transforms.ValueToKey",
+            "transforms.createKey.fields":"id",
+            "transforms.extractInt.type":"org.apache.kafka.connect.transforms.ExtractField$Key",
+            "transforms.extractInt.field":"id"
+        }
+     }
 }
 
